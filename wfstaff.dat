@@ -1,0 +1,33 @@
+# set data staff
+data;
+
+set StaffTypes :=
+	electric
+	mechanic
+	storage
+	software
+;
+
+set StaffLevels :=
+	junior
+	middle
+	senior
+;
+
+param staff_level_xp :=
+	junior		1
+	middle		3
+	senior		6
+;
+
+param staff_level :
+			junior		middle		senior	:=
+	electric	3		1		0
+	mechanic	2		0		1
+	storage		1		1		0
+	software	0		1		1
+;
+
+#param staff_cost
+
+end; 

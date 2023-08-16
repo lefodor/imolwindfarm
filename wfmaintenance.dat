@@ -1,0 +1,52 @@
+# set data maintenance
+data;
+
+set MaintenanceTypes :=
+	blades
+	gearbox
+	generator
+	sensors
+	wiring
+;
+
+set MaintenanceSeverity :=
+	normal
+	severe
+;
+
+param main_req :
+			normal		severe :=
+	blades		10		4
+	gearbox		13		3
+	generator	6		8
+	sensors		12		2
+	wiring		15		1
+;
+
+param main_req_st :
+			electric	mechanic	storage		software :=
+	blades		0		3		4		0
+	gearbox		1		2		2		1
+	generator	2		1		2		1
+	sensors		2		1		1		2
+	wiring		3		0		3		2
+;
+
+param main_req_xp :
+			normal		severe :=
+	blades		2		4
+	gearbox		3		5
+	generator	4		9
+	sensors		1		3
+	wiring		1		2
+;
+
+param main_material_cost :=
+	blades		5
+	gearbox		10
+	generator	12
+	sensors		3
+	wiring		6
+;
+
+end; 
