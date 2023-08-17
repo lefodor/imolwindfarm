@@ -1,5 +1,5 @@
 # imolwindfarm
-glpsol -m windfarm.mod -d windfarm.dat -o output.txt
+glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt
 
 # Windfarm maintenance tasks
 Several maintenance jobs specific to windfarm are to be carried out with available staff.
