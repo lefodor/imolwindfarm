@@ -16,11 +16,20 @@ set MaintenanceSeverity :=
 
 param main_req :
 			normal		severe :=
-	blades		10		4
+	blades		10		0
 	gearbox		13		3
-	generator	6		8
-	sensors		12		2
-	wiring		15		1
+	generator	6		4
+	sensors		12		0
+	wiring		15		0
+;
+
+param main_req_xp :
+			normal		severe :=
+	blades		10		80
+	gearbox		25		100
+	generator	13		90
+	sensors		15		80
+	wiring		12		70
 ;
 
 param main_req_st :
@@ -32,21 +41,12 @@ param main_req_st :
 	wiring		3		0		3		2
 ;
 
-param main_req_xp :
-			normal		severe :=
-	blades		2		4
-	gearbox		3		5
-	generator	4		9
-	sensors		1		3
-	wiring		1		2
-;
-
 param main_material_cost :=
-	blades		5
-	gearbox		10
-	generator	12
-	sensors		3
-	wiring		6
+	blades		100
+	gearbox		150
+	generator	120
+	sensors		50
+	wiring		77
 ;
 
 end; 
