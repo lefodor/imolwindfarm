@@ -25,28 +25,27 @@ task than a senior). Also, there exist training programs with certain cost that 
 level of the staff, hence improving their time to complete a task.
 
 ## Sets
-set MaintenanceTypes							{blades, gearbox, generator, sensors, wiring}  
-set MaintenanceSeverity							{normal, severe}  
-set StaffTypes								{electric, mechanic, storage, software}  
-set StaffLevels								{junior, middle, senior}  
+* set MaintenanceTypes							{blades, gearbox, generator, sensors, wiring}  
+* set MaintenanceSeverity							{normal, severe}  
+* set StaffTypes								{electric, mechanic, storage, software}  
+* set StaffLevels								{junior, middle, senior}  
 
 ## Parameters
-param main_req{MaintenanceTypes,MaintenanceSeverity}; 			# cnt of maintenance required  
-param main_req_st{MaintenanceTypes,StaffTypes};				# cnt of staff required per maintenance type and staff category  
-param main_req_xp{MaintenanceTypes,MaintenanceSeverity};		# required XP for maintenance task based on severity  
-param main_material_cost{MaintenanceTypes}; 				# material cost of maintenance tasks  
-param staff_level_xp{StaffLevels};					# staff level XPs  
-param staff_cost{StaffTypes,StaffLevels}; 				# staff cost per type and level  
+* param main_req{MaintenanceTypes,MaintenanceSeverity}; 		# cnt of maintenance required  
+* param main_req_st{MaintenanceTypes,StaffTypes};			# cnt of staff required per maintenance type and staff category  
+* param main_req_xp{MaintenanceTypes,MaintenanceSeverity};		# required XP for maintenance task based on severity  
+* param main_material_cost{MaintenanceTypes}; 				# material cost of maintenance tasks  
+* param staff_level_xp{StaffLevels};					# staff level XPs  
+* param staff_cost{StaffTypes,StaffLevels}; 				# staff cost per type and level  
 	
 ## Variables
-var total_main_req_xp{MaintenanceTypes};				# required XP points to carry out maintenance task  
-var total_staff_xp{StaffTypes};						# total available XP per staff types of hired personnel  
-var total_staff{StaffTypes};						# total cnt of hired personnel  
-var total_staff_xp_task{MaintenanceTypes};*				# XP of hired personnel per category required for maintenance task  
-var staff_to_hire{StaffTypes, StaffLevels};				# cnt of staff needed as per type and level  
-var quantity{MaintenanceTypes};						# cnt maintenance tasks to be carried out  
-
-* total_staff_xp_task: XP of hired personnel who are required for the given maintenance task => main_req_st[mt,st] != 0  
+* var total_main_req_xp{MaintenanceTypes};				# required XP points to carry out maintenance task  
+* var total_staff_xp{StaffTypes};					# total available XP per staff types of hired personnel  
+* var total_staff{StaffTypes};						# total cnt of hired personnel  
+* var total_staff_xp_task{MaintenanceTypes};				# XP of hired personnel per category required for maintenance task  
+...XP of hired personnel who are required for the given maintenance task => main_req_st[mt,st] != 0
+* var staff_to_hire{StaffTypes, StaffLevels};				# cnt of staff needed as per type and level  
+* var quantity{MaintenanceTypes};						# cnt maintenance tasks to be carried out  
 
 ## Conditions
 
