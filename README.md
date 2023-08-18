@@ -8,11 +8,8 @@ The below code calls the model file `windfarm.mod` with data files `wfmaintenanc
 
 `glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt`
 
-# Windfarm maintenance tasks
-Several maintenance jobs specific to windfarm are to be carried out with available staff.
-Maintenance tasks are described by material costs and cost of staff.
-Objective is to minimize total costs of maintenance including material and staff related costs
-and to minimize total downtime of wind turbines.
+# Windfarm problem setting
+Several maintenance jobs specific to windfarm are to be carried out while minimizing costs. Costs are broken down to material and staff related components. Each maintenance job requires staff with different expertise and each job can be normal or severe maintenance that requires deeper knowledge from the staff to resolve. The staff also has an attribute called experience points or job expertise that can be junior/middle/senior the higher the level of experience the more XP is related but also higher staff costs are induced.  
 
 ## Maintenance jobs
 Maintenance jobs can be divided to minimum maintenance requirements and ad-hoc maintenance jobs. 
