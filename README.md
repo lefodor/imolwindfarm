@@ -48,5 +48,9 @@ XP of hired personnel who are required for the given maintenance task => main_re
 * var quantity{MaintenanceTypes};						# cnt maintenance tasks to be carried out  
 
 ## Conditions
+* XP condition: sufficient XP points to carry out upcoming maintenance tasks based on severity. It is only required to have enough XPs to carry out the given type of maintenance task (based on severity), e.g. maintenance task "blades" normally requires 10 XPs whereas severe requires 80 XPs but no severe maintenance task is required for "blades" then the condition prescribes 10 XPs for this maintenance task.
+* Staff condition: number of staff for a given type (no matter if junior/middle/senior) covers the required number of staff for all maintenance tasks. E.g. in order to be able carry out maintenance task "blades", main_req_st[MaintenanceType,StaffType] prescribes 3 mechanics and 4 storage personnel.
+* Minimum maintenance: maintenance jobs defined in main_req are carried out
 
 ## Objectives
+
