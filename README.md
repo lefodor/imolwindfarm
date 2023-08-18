@@ -3,8 +3,9 @@
 ## Requirements
 GLPK-utils installed on machine. E.g on Ubuntu run `sudo apt install glpk-utils` .
 
-## how to call
-glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt
+## How to call
+The below code calls the model file `windfarm.mod` with data files `wfmaintenance.dat` and `wfstaff.dat` and writes `output.txt`.
+`glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt`
 
 # Windfarm maintenance tasks
 Several maintenance jobs specific to windfarm are to be carried out with available staff.
