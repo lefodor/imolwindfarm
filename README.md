@@ -43,7 +43,7 @@ level of the staff, hence improving their time to complete a task.
 * var total_staff_xp{StaffTypes};					# total available XP per staff types of hired personnel  
 * var total_staff{StaffTypes};						# total cnt of hired personnel  
 * var total_staff_xp_task{MaintenanceTypes};				# XP of hired personnel per category required for maintenance task  
-...XP of hired personnel who are required for the given maintenance task => main_req_st[mt,st] != 0
+..*XP of hired personnel who are required for the given maintenance task => main_req_st[mt,st] != 0
 * var staff_to_hire{StaffTypes, StaffLevels};				# cnt of staff needed as per type and level  
 * var quantity{MaintenanceTypes};						# cnt maintenance tasks to be carried out  
 
