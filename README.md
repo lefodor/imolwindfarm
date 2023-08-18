@@ -5,6 +5,7 @@ GLPK-utils installed on machine. E.g on Ubuntu run `sudo apt install glpk-utils`
 
 ## How to call
 The below code calls the model file `windfarm.mod` with data files `wfmaintenance.dat` and `wfstaff.dat` and writes `output.txt`.
+
 `glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt`
 
 # Windfarm maintenance tasks
