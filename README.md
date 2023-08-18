@@ -12,14 +12,10 @@ The below code calls the model file `windfarm.mod` with data files `wfmaintenanc
 Several maintenance jobs specific to windfarm are to be carried out while minimizing costs. Costs are broken down to material and staff related components. Each maintenance job requires staff with different expertise and each job can be normal or severe maintenance that requires deeper knowledge from the staff to resolve. The staff also has an attribute called experience points or job expertise that can be junior/middle/senior the higher the level of experience the more XP is related but also higher staff costs are induced.  
 
 ## Maintenance jobs
-Maintenance jobs can be divided to minimum maintenance requirements and ad-hoc maintenance jobs. 
-Minimum maintenance jobs are easy to plan while ad-hoc maintenance jobs occur according to their probabilities.
+Maintenance jobs are divided into 5 types based on which expertise is required from the staff. Each of the 5 maintenance types are further grouped based on severity. Level of severity determines the XPs required from the staff to accomplish such task. Currently only 2 severity level have been set for each task types, "normal" stands for regular task and "severe" stands for more difficult operations with higher required XP.  
 
 ## Staff
-Staff is described by competence level (junior/middle/senior). The lower the competence level, the longer
-the time required for the colleague to fix a maintenance job (a junior needs more time to carry out a 
-task than a senior). Also, there exist training programs with certain cost that increases the competence
-level of the staff, hence improving their time to complete a task.
+Staff is divided into 4 types: electrician is taking care of wiring and electrical repairs, mechanic is tasked with assembling/disassembling stuffs, storage workers are keeping the warehouse tidy and in order while software engineers are responsible for programming controlling software and calibrating the elements. Staff is also described by level of expertise, there are 3 categories with different experience points: junior, middle, senior. 
 
 ## Sets
 * set MaintenanceTypes							{blades, gearbox, generator, sensors, wiring}  
