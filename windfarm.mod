@@ -35,10 +35,7 @@ s.t. AvailableXP_task{mt in MaintenanceTypes}:
 s.t. AvailableXP_ge_RequiredXP{mt in MaintenanceTypes}:
 	total_staff_xp_task[mt] >= total_main_req_xp[mt];
 
-# staff: enough personnel to cover staff requirements per maintenance tasks
-#s.t. RequiredStaff{mt in MaintenanceTypes}:
-#	task_main_req_st[mt] = sum{st in StaffTypes} main_req_st[mt,st];	
-
+# staff: enough personnel to cover staff requirements per maintenance tasks	
 s.t. AvailableStaff{st in StaffTypes}:
 	total_staff[st] = sum{sl in StaffLevels} staff_to_hire[st,sl];
 	
@@ -53,10 +50,6 @@ s.t. RequiredMaintenanceDone{mt in MaintenanceTypes}:
 minimize TotalCosts: 
 	sum{st in StaffTypes, sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl] +
 	sum{mt in MaintenanceTypes} (main_material_cost[mt]) * quantity[mt] ;
-
-# to do:
-# add var for staff => how many people needed to carry out minimum requirement with minimal costs
-# add var for downtime per maintenance tasks
 
 solve;
 

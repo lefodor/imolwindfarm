@@ -16,7 +16,7 @@ set MaintenanceSeverity :=
 
 param main_req :
 			normal		severe :=
-	blades		10		5
+	blades		12		5
 	gearbox		13		3
 	generator	6		4
 	sensors		8		0
