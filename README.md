@@ -25,10 +25,10 @@ task than a senior). Also, there exist training programs with certain cost that 
 level of the staff, hence improving their time to complete a task.
 
 ## Sets
-<p>set MaintenanceTypes	&emsp;&emsp;					{blades, gearbox, generator, sensors, wiring} <br>
-set MaintenanceSeverity &emsp;&emsp;					{normal, severe} <br>
-set StaffTypes &emsp;&emsp;						{electric, mechanic, storage, software} <br>
-set StaffLevels &emsp;&emsp;						{junior, middle, senior} <br>
+<p>set MaintenanceTypes	&emsp;&emsp;					{blades, gearbox, generator, sensors, wiring}  
+set MaintenanceSeverity &emsp;&emsp;					{normal, severe}  
+set StaffTypes &emsp;&emsp;						{electric, mechanic, storage, software}  
+set StaffLevels &emsp;&emsp;						{junior, middle, senior}  
 </p>
 
 ## Parameters
