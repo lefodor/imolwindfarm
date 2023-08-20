@@ -53,6 +53,8 @@ minimize TotalCosts:
 
 solve;
 
+printf "-----------------------------------------------------------------------\n";
+
 printf "total_main_req_xp\n";
 for{mt in MaintenanceTypes}{
 	    printf "%s\t",mt;
@@ -60,6 +62,8 @@ for{mt in MaintenanceTypes}{
 	printf "\n";
 }
 printf "\n";
+
+printf "-----------------------------------------------------------------------\n";
 
 printf "total_staff_xp\n";
 for{st in StaffTypes}{
@@ -69,6 +73,8 @@ for{st in StaffTypes}{
 }
 printf "\n";
 
+printf "-----------------------------------------------------------------------\n";
+
 printf "total_staff_xp_task\n";
 for{mt in MaintenanceTypes}{
 	    printf "%s\t",mt;
@@ -76,6 +82,8 @@ for{mt in MaintenanceTypes}{
 	printf "\n";
 }
 printf "\n";
+
+printf "-----------------------------------------------------------------------\n";
 
 printf "total_staff\n";
 for{st in StaffTypes}{
@@ -85,14 +93,19 @@ for{st in StaffTypes}{
 }
 printf "\n";
 
+printf "-----------------------------------------------------------------------\n";
+
 printf "staff_to_hire\n";
 for{st in StaffTypes}{
 	printf "%s\n",st;
 	for{sl in StaffLevels}{
+		printf "%s     ",sl;
 		printf "%d",staff_to_hire[st,sl];
 		printf "\n";
 	}
+	printf "\n";
 }
-printf "\n";
+
+printf "-----------------------------------------------------------------------\n";
 
 end;
