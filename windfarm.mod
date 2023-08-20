@@ -11,12 +11,14 @@ param main_material_cost{MaintenanceTypes}; 					# maintenance cost
 	
 param staff_level_xp{StaffLevels};						# staff level XPs
 param staff_cost{st in StaffTypes, sl in StaffLevels}; 				# staff cost
-	
+
 ## variables
 var total_main_req_xp{MaintenanceTypes};					# required XP points to carry out maintenance task
 var total_staff_xp{StaffTypes};							# total available XP per staff types of hired personnel
 var total_staff{StaffTypes};							# total cnt of hired personnel
 var total_staff_xp_task{MaintenanceTypes};					# XP of hired personnel per staff category
+var weighted_maintenance_tasks{MaintenanceTypes};				# nr of maintenance tasks weighted by burnout factor
+var wgt_main_staff{MaintenanceTypes,StaffTypes};
 
 var staff_to_hire{StaffTypes, StaffLevels} >=0, integer;
 var quantity{MaintenanceTypes} >= 0;
@@ -41,7 +43,7 @@ s.t. AvailableStaff{st in StaffTypes}:
 	
 s.t. AvailableStaff_ge_RequiredStaff{mt in MaintenanceTypes, st in StaffTypes}:
 	total_staff[st] >= main_req_st[mt, st];
-	
+
 # minimum maintenance
 s.t. RequiredMaintenanceDone{mt in MaintenanceTypes}: 
 	quantity[mt] >= sum{ms in MaintenanceSeverity} main_req[mt,ms];
@@ -95,17 +97,33 @@ printf "\n";
 
 printf "-----------------------------------------------------------------------\n";
 
-printf "staff_to_hire\n";
+printf "staff_to_hire and staff cost ===== %d\n", sum{st in StaffTypes,sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl];
 for{st in StaffTypes}{
-	printf "%s\n",st;
+	printf "%s",st;
+	printf "   =========== %d\n",sum{sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl];
 	for{sl in StaffLevels}{
 		printf "%s     ",sl;
 		printf "%d",staff_to_hire[st,sl];
+		printf ".......... %d",staff_to_hire[st,sl] * staff_cost[st,sl];
 		printf "\n";
 	}
 	printf "\n";
 }
 
 printf "-----------------------------------------------------------------------\n";
+
+printf "main_material_cost ===== %d\n", sum{mt in MaintenanceTypes}main_material_cost[mt] * quantity[mt];
+printf {mt in MaintenanceTypes}: "%s......%d\n",mt,main_material_cost[mt] * quantity[mt];
+
+printf "-----------------------------------------------------------------------\n";
+
+printf "total costs = SUM(material costs) + SUM(staff costs) \n";
+printf "%d = %d + %d\n",
+sum{mt in MaintenanceTypes}main_material_cost[mt] * quantity[mt] + 
+sum{st in StaffTypes,sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl], sum{mt in MaintenanceTypes}main_material_cost[mt] * quantity[mt],
+sum{st in StaffTypes,sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl] ;
+
+printf "-----------------------------------------------------------------------\n";
+
 
 end;

@@ -15,25 +15,17 @@ set StaffLevels :=
 ;
 
 param staff_level_xp :=
-	junior		1
-	middle		6
-	senior		20
+	junior		2
+	middle		20
+	senior		30
 ;
-
-#param staff_level :
-#			junior		middle		senior	:=
-#	electric	3		1		0
-#	mechanic	3		0		1
-#	storage		3		1		0
-#	software	0		1		1
-#;
 
 param staff_cost :
 			junior		middle		senior	:=
-	electric	10		15		35
-	mechanic	8		14		20
-	storage		5		12		25
-	software	10		12		15
+	electric	10		28		50
+	mechanic	8		24		40
+	storage		12		15		20
+	software	10		30		50
 ;
 
 

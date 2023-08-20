@@ -18,35 +18,35 @@ param main_req :
 			normal		severe :=
 	blades		12		5
 	gearbox		13		3
-	generator	6		4
-	sensors		8		0
+	generator	6		10
+	sensors		8		1
 	wiring		9		0
 ;
 
 param main_req_xp :
 			normal		severe :=
-	blades		10		80
-	gearbox		25		100
-	generator	13		90
-	sensors		15		80
-	wiring		12		70
+	blades		50		125
+	gearbox		125		150
+	generator	113		230
+	sensors		110		150
+	wiring		30		50
 ;
 
 param main_req_st :
 			electric	mechanic	storage		software :=
 	blades		0		3		4		0
-	gearbox		1		2		2		1
-	generator	2		1		2		1
-	sensors		2		1		1		2
+	gearbox		3		2		0		1
+	generator	4		3		0		1
+	sensors		5		3		0		2
 	wiring		3		0		3		2
 ;
 
 param main_material_cost :=
-	blades		1000
-	gearbox		1500
-	generator	1200
-	sensors		500
-	wiring		770
+	blades		100
+	gearbox		150
+	generator	120
+	sensors		50
+	wiring		77
 ;
 
 end; 
