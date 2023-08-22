@@ -22,8 +22,8 @@ param staff_level_xp :=
 
 param staff_cost :
 			junior		middle		senior	:=
-	electric	10		28		50
-	mechanic	8		50		60
+	electric	10		15		40
+	mechanic	8		18		30
 	storage		12		15		20
 	software	10		40		50
 ;
