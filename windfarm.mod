@@ -4,20 +4,19 @@ set MaintenanceSeverity;
 set StaffTypes;
 set StaffLevels;
 
-param main_req{mt in MaintenanceTypes, ms in MaintenanceSeverity}; # cnt of maintenance required
-param main_req_st{mt in MaintenanceTypes, st in StaffTypes}; # cnt of staff required per maintenance type
-param main_req_xp{mt in MaintenanceTypes, ms in MaintenanceSeverity}; # required xp for maintenance task
-param main_material_cost{MaintenanceTypes}; # maintenance cost
+param main_req{mt in MaintenanceTypes, ms in MaintenanceSeverity}; # cnt of maintenance required  
+param main_req_st{mt in MaintenanceTypes, st in StaffTypes}; # cnt of staff required per maintenance type  
+param main_req_xp{mt in MaintenanceTypes, ms in MaintenanceSeverity}; # required xp for maintenance task  
+param main_material_cost{MaintenanceTypes}; # maintenance cost  
 	
-param staff_level_xp{StaffLevels};						
+param staff_level_xp{StaffLevels};  
 param staff_cost{st in StaffTypes, sl in StaffLevels}; 	
-param main_burnout{MaintenanceSeverity};
-param burnout_coef; 
+param main_burnout{MaintenanceSeverity}; # weights to indicating staff's exhaustion due to work on task with given severity  
+param burnout_coef; # bearable level of staff's exhaustion  
 
 ## variables
 var total_main_req_xp{MaintenanceTypes}; # required XP points to carry out maintenance task
 var total_staff_xp{StaffTypes};	# total available XP per staff types of hired personnel
-var total_req_staff_main{MaintenanceTypes}; # total required staff to carry out maintenance task
 var total_staff{StaffTypes}; # total cnt of hired personnel
 var total_staff_xp_task{MaintenanceTypes}; # XP of hired personnel per staff category
 var weighted_maintenance_tasks{MaintenanceTypes}; # nr of maintenance tasks weighted by burnout factor
@@ -43,9 +42,6 @@ s.t. AvailableXP_ge_RequiredXP{mt in MaintenanceTypes}:
 # staff: enough personnel to cover staff requirements per maintenance tasks	
 s.t. AvailableStaff{st in StaffTypes}:
 	total_staff[st] = sum{sl in StaffLevels} staff_to_hire[st,sl];
-
-s.t. TotalStaffperMain{mt in MaintenanceTypes}:
-    total_req_staff_main[mt] = sum{st in StaffTypes} main_req_st[mt,st];
 	
 s.t. AvailableStaff_ge_RequiredStaff{mt in MaintenanceTypes, st in StaffTypes}:
 	total_staff[st] >= main_req_st[mt, st];
@@ -54,7 +50,7 @@ s.t. AvailableStaff_ge_RequiredStaff{mt in MaintenanceTypes, st in StaffTypes}:
 s.t. RequiredMaintenanceDone{mt in MaintenanceTypes}: 
 	quantity[mt] >= sum{ms in MaintenanceSeverity} main_req[mt,ms];
 
-## burnout indicators
+# burnout indicators
 s.t. StaffNoBurnout{mt in MaintenanceTypes}:
     weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
 
@@ -62,7 +58,7 @@ s.t. TotalReqWgtStaff{st in StaffTypes}:
     total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
 
 # burnout
-s.t. BurnOutNotAllowed2{st in StaffTypes}:
+s.t. BurnOutNotAllowed{st in StaffTypes}:
     total_req_wgt_staff[st] <= total_staff[st] * burnout_coef;
 
 ## Objective
