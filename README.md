@@ -32,14 +32,17 @@ Staff is divided into 4 types: electrician is taking care of wiring and electric
 * param staff_cost{StaffTypes,StaffLevels}; 				# staff cost per type and level  
 	
 ## Variables
+### Variables used by solver
+* var staff_to_hire{StaffTypes, StaffLevels};				# cnt of staff needed as per type and level  
+* var quantity{MaintenanceTypes};					# cnt maintenance tasks to be carried out  
+
+### Redundant variables - improve readability
 * var total_main_req_xp{MaintenanceTypes};				# required XP points to carry out maintenance task  
 * var total_staff_xp{StaffTypes};					# total available XP per staff types of hired personnel  
 * var total_staff{StaffTypes};						# total cnt of hired personnel  
 * var total_staff_xp_task{MaintenanceTypes};				# XP of hired personnel per category required for maintenance task  
 XP of hired personnel who are required for the given maintenance task => main_req_st[mt,st] != 0
-* var staff_to_hire{StaffTypes, StaffLevels};				# cnt of staff needed as per type and level  
-* var quantity{MaintenanceTypes};					# cnt maintenance tasks to be carried out  
-
+ 
 ## Conditions
 * *XP condition:* sufficient XP points to carry out upcoming maintenance tasks based on severity. It is only required to have enough XPs to carry out all types of maintenance task (based on severity), e.g. maintenance task "blades" normally requires 10 XPs whereas severe requires 80 XPs but no severe maintenance task is required for "blades" (in the main_req parameter) then the condition prescribes 10 XPs for this maintenance task. It does not matter how many maintenance jobs are expected, the hired staff has to have enough XPs to do all types of jobs. E.g. if normal maintenance task "blades" is expected 12 times and no severe "blades" task required, then XPs of hired personnel has to have at least 10 XPs (normal "blade" maintenance XP) and not 12 times 10 XPs. It will just take them more time to do all 12 normal "blades" job. 
 * *Staff condition:* number of staff for a given type (no matter if junior/middle/senior) covers the required number of staff for each maintenance task. E.g. in order to be able carry out maintenance task "blades", main_req_st[MaintenanceType,StaffType] prescribes 3 mechanics and 4 storage personnel so at least 3 mechanis and 4 storage workers have to be hired.
