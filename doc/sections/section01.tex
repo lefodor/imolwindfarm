@@ -1,0 +1,102 @@
+\section{Windfarm problem setting}
+  \paragraph{}
+    Several maintenance jobs specific to windfarm are to be carried out while minimizing costs. 
+    Costs are broken down to material and staff related components. Each maintenance job 
+    requires staff with different expertise and each job can be normal or severe maintenance 
+    that requires deeper knowledge from the staff to resolve. The staff also has an attribute 
+    called experience points or job expertise that can be junior/middle/senior the higher 
+    the level of experience the more XP is related but also higher staff costs are associated.
+
+    \begin{figure}[h!]
+      \centering
+      \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{12482.jpg}
+        \caption{Windfarm}
+        \label{fig:Windfarm}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{12481.jpg}
+        \caption{More windfarm.}
+        \label{fig:More windfarm}
+      \end{subfigure}
+      \caption{Windfarms near Mosonmagyarovar, HU.}
+      %\label{fig:windfarm}
+    \end{figure}
+
+    \subsection{Maintenance jobs}
+      Maintenance jobs are divided into 5 types based on which expertise is required from the staff. 
+      Each of the 5 maintenance types are further grouped based on severity. Level of severity 
+      determines the XPs required from the staff to accomplish such task. Currently only 
+      2 severity levels have been set for each task types, "normal" stands for regular task 
+      and "severe" stands for more difficult operations with higher required XP.
+
+    \subsection{Staff}
+      Staff is divided into 4 types: electrician is taking care of wiring and electrical repairs, 
+      mechanic is tasked with assembling/disassembling stuffs, storage workers are keeping 
+      the warehouse tidy and in order while software engineers are responsible for 
+      programming controlling software and calibrating the elements. Staff is also described by 
+      level of expertise, there are 3 categories with different experience points: junior, middle, senior.
+
+    \subsection{Sets}
+      \begin{itemize}
+          \item set MaintenanceTypes \{blades, gearbox, generator, sensors, wiring\}
+          \item set MaintenanceSeverity \{normal, severe\}
+          \item set StaffTypes \{electric, mechanic, storage, software\}
+          \item set StaffLevels \{junior, middle, senior\}
+        \end{itemize}
+
+      \subsection{Parameters}
+        \begin{itemize}
+          \item param main\_req \{MaintenanceTypes, MaintenanceSeverity\}: cnt of maintenance required
+          \item param main\_req\_st\{MaintenanceTypes,StaffTypes\}: cnt of staff required per maintenance type and staff category
+          \item param main\_req\_xp\{MaintenanceTypes,MaintenanceSeverity\}: required XP for maintenance task based on severity
+          \item param main\_material\_cost\{MaintenanceTypes\}: material cost of maintenance tasks
+          \item param staff\_level\_xp\{StaffLevels\}: staff level XPs
+          \item param staff\_cost\{StaffTypes,StaffLevels\}: staff cost per type and level
+          \item param main\_burnout: weight based on severity of maintenance task
+          \item param burnout\_coef: total (severity weighted) tasks / staff cutoff
+        \end{itemize}
+
+      \subsection{Variables}
+        \subsubsection{Variables used by solver}
+          \begin{itemize}
+            \item var staff\_to\_hire\{StaffTypes, StaffLevels\}: cnt of staff needed as per type and level
+            \item var quantity\{MaintenanceTypes\}: cnt maintenance tasks to be carried out
+          \end{itemize}
+
+        \subsubsection{Redundant variables - improve readability}
+          \begin{itemize}
+            \item var total\_main\_req\_xp\{MaintenanceTypes\}: required XP points to carry out maintenance task
+            \item var total\_staff\_xp\{StaffTypes\}: total available XP per staff types of hired personnel
+            \item var total\_staff\{StaffTypes\}: total cnt of hired personnel
+            \item var total\_staff\_xp\_task\{MaintenanceTypes\}: XP of hired personnel per category required for maintenance task
+            \item var weighted\_maintenance\_tasks\{MaintenanceTypes\}: nr of maintenance tasks weighted by burnout factor
+            \item var total\_req\_wgt\_staff\{StaffTypes\}: total cnt of required staff for maintenance tasks weighted by severity
+          \end{itemize}
+        
+      \subsection{Conditions}
+        \begin{itemize}
+          \item \textit{XP condition:} sufficient XP points to carry out upcoming maintenance tasks based on severity. 
+          It is only required to have enough XPs to carry out at least one of all types of maintenance task 
+          (based on severity), e.g. maintenance task "blades" normally requires 10 XPs whereas severe 
+          requires 80 XPs but when no severe maintenance task is scheduled for "blades" (main\_req parameter 
+          is set to 0) then the condition prescribes 10 XPs for this maintenance task (normal severity level).
+          It does not matter how many maintenance jobs are expected, the hired staff has to have 
+          enough XPs to do all types of jobs. E.g. if normal maintenance task "blades" is expected 
+          12 times and no severe "blades" task required, then XPs of hired personnel has to have at least 
+          10 XPs (normal "blade" maintenance XP) and not 12 times 10 XPs. It will just take them more time 
+          to do all 12 normal "blades" job.
+          \item \textit{Staff condition:} number of staff for a given type (no matter if junior/middle/senior) 
+          covers the required number of staff for each maintenance task. E.g. in order to be able carry 
+          out maintenance task "blades", main\_req\_st\{MaintenanceType,StaffType\} prescribes 3 mechanics 
+          and 4 storage personnel so at least 3 mechanics and 4 storage workers have to be hired.
+          \item \textit{Minimum maintenance:} maintenance jobs defined in main\_req are carried out.
+          \item \textit{Burnout indicator:} staff is not overloaded meaning that the severity weighted number 
+          of maintenance tasks per staff member has to be lower than the parameter burnout\_coef.
+        \end{itemize}
+
+      \subsection{Objectives}
+      Minimize total costs given by the aggregated sum of main\_material\_cost and staff\_cost given 
+      the above conditions.
