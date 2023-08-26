@@ -45,56 +45,133 @@
     \end{itemize}
 
     \subsection{Model setup}
-        \subsubsection{Sample Matrix}
-            This is just a sample matrix\\
-            \begin{gather}
-                \begin{bmatrix} \Phi_{11} & \Phi_{12} \\ \Phi_{21} & \Phi_{22} \end{bmatrix}
-                =
-                \frac{1}{\det(X)}
-                \begin{bmatrix}
-                X_{22} Y_{11} - X_{12} Y_{21} &
-                X_{22} Y_{12} - X_{12} Y_{22} \\
-                X_{11} Y_{21} - X_{21} Y_{11} &
-                X_{11} Y_{22} - X_{21} Y_{12} 
-                \end{bmatrix}
-            \end{gather}
-
 
         \subsubsection{Conditions and variables}
         The condition section of the modelling file is broken down to 4 main sections, XP conditions,
         Staff conditions, Minimum maintenance and Burnout indicators respectively. The XP condition 
         takes care of that the hired staff have at least as much XP points that is necessary to be able
         to carry out the required maintenance tasks. The following variables are calculated within this
-        section:\\
+        section: 
+        \newpage
         
         \textbf{XP conditions} \newline
+        \hspace*{.5cm}Firstly, redundant variables:
+        %total_main_req_xp[mt] = (if main_req[mt,"severe"] <> 0 then main_req_xp[mt,"severe"] else main_req_xp[mt,"normal"]);
         \begin{equation}
+            %\hfilneg 
             \underset{mt\times 1}{\mathrm{\text{total\_main\_req\_xp}}} = 
             \begin{cases}
-                \underset{mt\times ms}{\text{main\_req\_xp[mt,"severe"]}}, \underset{mt\times ms}{\text{ if } \text{main\_req\_xp[mt,"severe"]}} > 0\\
+                \underset{mt\times ms}{\text{main\_req\_xp[mt,"severe"]}}, \underset{mt\times ms}{\text{ if } \text{main\_req\_xp[mt,"severe"]}} > 0\\[3ex]
                 \underset{mt\times ms}{\text{main\_req\_xp[mt,"normal"]}}, \text{ otherwise}\\
             \end{cases}
+            %\hspace{10000pt minus 1fil}
         \end{equation}
 
+        %total_staff_xp[st] = sum{sl in StaffLevels} staff_to_hire[st,sl] * staff_level_xp[sl];
         \begin{equation}
+            %\hfilneg
             \underset{st\times 1}{\text{total\_staff\_xp}} =  
                 \underset{st\times sl}{\text{staff\_to\_hire}}\times \underset{sl\times 1}{\text{staff\_level\_xp}}
+            %\hspace{10000pt minus 1fil}
+        \end{equation}
+
+        %total_staff_xp_task[mt] = sum{st in StaffTypes} if main_req_st[mt,st] <> 0 then total_staff_xp[st] else 0 ;
+        \begin{equation}
+            %\hfill
+            \underset{mt\times 1}{\text{total\_staff\_xp\_task}} =
+            \begin{cases}
+                \underset{st\times 1}{\text{total\_staff\_xp[st]}}, \underset{mt\times st}{\text{ if } \text{main\_req\_st[mt,st]}} > 0\\[3ex]
+                0, \text{ otherwise}
+            \end{cases}
+            %\hspace{10000pt minus 1fil}
+        \end{equation} \newline
+
+        \text{Finally, the required condition is}
+        %total_staff_xp_task[mt] >= total_main_req_xp[mt];
+        \begin{equation}
+            \underset{mt\times 1}{\text{total\_staff\_xp\_task}} >=  
+                \underset{mt\times 1}{\text{total\_main\_req\_xp}}
         \end{equation}
 
         \textbf{Staff conditions} \newline
+        \hspace*{.5cm}Again, introduce (this time only one) redundant variable:
+        %total_staff[st] = sum{sl in StaffLevels} staff_to_hire[st,sl];
+        \begin{equation}
+            \underset{st\times 1}{\text{total\_staff}} = 
+                \sum_{sl}\underset{st\times sl}{\text{staff\_to\_hire[st,sl]}}
+        \end{equation}
+
+        \text{The staff condition is}
+        %total_staff[st] >= main_req_st[mt, st];
+        \begin{equation}
+            \underset{st\times 1}{\text{total\_staff}} >= 
+                \sum_{mt}\underset{mt\times st}{\text{main\_req\_st}^T\text{[mt,st]}}
+        \end{equation}
 
         \textbf{Minimum maintenance} \newline
+        \hspace*{.5cm}No redundant variables this time:
+        %quantity[mt] >= sum{ms in MaintenanceSeverity} main_req[mt,ms];
+        \begin{equation}
+            \underset{mt\times 1}{\text{quantity}} >= 
+                \sum_{ms}\underset{mt\times ms}{\text{main\_req[mt,ms]}}
+        \end{equation}
 
         \textbf{Burnout condition} \newline
+        \hspace*{.5cm}Redundant variables:
+        %weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
+        \begin{equation}
+            %\hfilneg
+            \underset{mt\times 1}{\text{weighted\_maintenance\_tasks}} =  
+                \underset{mt\times ms}{\text{main\_req[mt,ms]}}\times \underset{ms\times 1}{\text{main\_burnout[ms]}}
+            %\hspace{10000pt minus 1fil}
+        \end{equation}
 
+        %total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
+        \begin{equation}
+            %\hfilneg
+            \underset{1\times st}{\text{total\_req\_wgt\_staff}} =  
+                \underset{mt\times 1}{{\text{weighted\_maintenance\_tasks}^T\text{[mt]}}}\times \underset{mt\times st}{\text{main\_req\_st[mt,st]}}
+            %\hspace{10000pt minus 1fil}
+        \end{equation}
+
+        The required burnout condition is:
+        %total_req_wgt_staff[st] <= total_staff[st] * burnout_coef;
+        \begin{equation}
+            \underset{st\times 1}{\text{total\_req\_wgt\_staff[st]}} <= 
+                \underset{st\times 1}{\text{total\_staff[st]}} * \text{burnout\_coef}
+        \end{equation}
 
         where \newline
-            \indent \textit{mt} is in MaintenanceTypes \newline
-            \indent \textit{ms} is in MaintenanceSeverity \newline
-            \indent \textit{st} is in StaffTypes \newline
-            \indent \textit{st} is in StaffLevels \newline
-        sets.
+            \hspace*{.75cm} \textit{mt} is in MaintenanceTypes \newline
+            \hspace*{.75cm} \textit{ms} is in MaintenanceSeverity \newline
+            \hspace*{.75cm} \textit{st} is in StaffTypes \newline
+            \hspace*{.75cm} \textit{st} is in StaffLevels \newline
+        \hspace*{.55cm}sets.
 
+        \subsubsection{Objective}
+        The objective function of the modelling exercise is minimizing total costs obtained as the 
+        sum of material and staff related costs while fulfilling required maintenance tasks given 
+        the conditions. Total staff cost is obtained by multiplying matrices 
+        \textit{staff\_to\_hire} and \textit{staff\_cost} and then taking the trace of the resulting
+        matrix:
+        \[
+            \text{TotalStaffCost} = 
+            \text{tr}\left( \underset{(st \times sl)}{\text{staff\_to\_hire}} \times
+            \underset{(st \times sl)}{\text{staff\_cost}^T}\right)
+        \]
+
+        Total material cost can be obtained by simply taking the sumproduct of vectors
+        \textit{main\_material\_cost} and \textit{quantity}:
+        \[
+            \text{TotalMaterialCost} = 
+            \sum_{mt}\text{main\_maintenance\_cost[mt]} * \text{quantity[mt]}
+        \]
+
+        Objective to be minimized:
+        \begin{equation}
+            \text{minimize TotalCosts} = 
+                \text{TotalStaffCost} + \text{TotalMaterialCost}
+        \end{equation}
 
     \subsection{Sample output}
 
