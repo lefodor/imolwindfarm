@@ -54,7 +54,7 @@
         section: 
         \newpage
         
-        \textbf{XP conditions} \newline
+        \subparagraph{XP conditions} \label{xp condition} \text{} \newline
         \hspace*{.5cm}Firstly, redundant variables:
         %total_main_req_xp[mt] = (if main_req[mt,"severe"] <> 0 then main_req_xp[mt,"severe"] else main_req_xp[mt,"normal"]);
         \begin{equation}
@@ -93,7 +93,7 @@
                 \underset{mt\times 1}{\text{total\_main\_req\_xp}}
         \end{equation}
 
-        \textbf{Staff conditions} \newline
+        \subparagraph{Staff conditions} \label{staff condition} \text{} \newline
         \hspace*{.5cm}Again, introduce (this time only one) redundant variable:
         %total_staff[st] = sum{sl in StaffLevels} staff_to_hire[st,sl];
         \begin{equation}
@@ -108,7 +108,7 @@
                 \sum_{mt}\underset{mt\times st}{\text{main\_req\_st}^T\text{[mt,st]}}
         \end{equation}
 
-        \textbf{Minimum maintenance} \newline
+        \subparagraph{Minimum maintenance} \label{minimum maintenance} \text{} \newline
         \hspace*{.5cm}No redundant variables this time:
         %quantity[mt] >= sum{ms in MaintenanceSeverity} main_req[mt,ms];
         \begin{equation}
@@ -116,7 +116,7 @@
                 \sum_{ms}\underset{mt\times ms}{\text{main\_req[mt,ms]}}
         \end{equation}
 
-        \textbf{Burnout condition} \newline
+        \subparagraph{Burnout condition} \label{burnout condition} \text{} \newline
         \hspace*{.5cm}Redundant variables:
         %weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
         \begin{equation}
@@ -174,6 +174,28 @@
         \end{equation}
 
     \subsection{Sample output}
-
+        \subsubsection{Parameter main\_req}
+        The parameter contains the required number of maintenance jobs (rows) based on severity 
+        (columns). The required number of maintenance jobs per types is given by the row sums 
+        (summed over severity level). The row sums are used in the condition \nameref{minimum maintenance}.
+        If the "severe" column for a maintenance job is greater than 0, it
+        means the 
+        \begin{table}[ht]
+            \begin{center}
+                \begin{tabular}{ |c|c|c| } 
+                \hline
+                Maintenance Type & normal & severe \\ 
+                \hline
+                blades    & 12 & 5  \\ 
+                gearbox   & 13 & 3  \\ 
+                generator & 6  & 10 \\ 
+                sensors   & 8  & 1  \\ 
+                wiring    & 9  & 0  \\ 
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{caption} % displayed in doc
+        \label{param_main_req} % for reference
+        \end{table}
 
     \subsection{Effect of parameters}
