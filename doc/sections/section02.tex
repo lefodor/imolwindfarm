@@ -173,18 +173,20 @@
                 \text{TotalStaffCost} + \text{TotalMaterialCost}
         \end{equation}
 
-    \subsection{Sample output}
+    \subsection{Sample input/output}
         \subsubsection{Parameter main\_req}
         The parameter contains the required number of maintenance jobs (rows) based on severity 
         (columns). The required number of maintenance jobs per types is given by the row sums 
         (summed over severity level). The row sums are used in the condition \nameref{minimum maintenance}.
-        If the "severe" column for a maintenance job is greater than 0, it
-        means the 
-        \begin{table}[ht]
+        \begin{table}[H]
             \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
                 \begin{tabular}{ |c|c|c| } 
                 \hline
-                Maintenance Type & normal & severe \\ 
+                \multirow{2}{*}{Maintenance Type} &
+                \multicolumn{2}{|c|}{Maintenance Severity}\\
+                \cline{2-2}\cline{3-3}
+                & normal & severe \\ 
                 \hline
                 blades    & 12 & 5  \\ 
                 gearbox   & 13 & 3  \\ 
@@ -194,8 +196,151 @@
                 \hline
                 \end{tabular}
             \end{center}
-        \caption{caption} % displayed in doc
+        \caption{main\_req} % displayed in doc
         \label{param_main_req} % for reference
         \end{table}
+
+        \subsubsection{Parameter main\_req\_xp}
+        The parameter contains the required experience points for the maintenance jobs (rows) 
+        based on severity (columns). In case the value for the "severe" task in \textit{main\_req} 
+        is greater than zero, the experience points defined in this parameter matrix is taken from
+        the "severe" column and from the "normal" otherwise (see \nameref{xp condition}). 
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c|c| } 
+                \hline
+                \multirow{2}{*}{Maintenance Type} &
+                \multicolumn{2}{|c|}{Maintenance Severity}\\
+                \cline{2-2}\cline{3-3}
+                & normal & severe \\ 
+                \hline
+                blades    & 50  & 125  \\ 
+                gearbox   & 125 & 150  \\ 
+                generator & 113 & 230 \\ 
+                sensors   & 110 & 150  \\ 
+                wiring    & 30  & 50  \\ 
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{main\_req\_xp} % displayed in doc
+        \label{param_main_req} % for reference
+        \end{table}
+
+        \subsubsection{Parameter main\_req\_st}
+        The parameter holds the number of personnel required to do the specific maintenance job. E.g.
+        the "blades" task requires 3 mechanics and 4 storage personnel to move the blades from the
+        storage to the windfarm site and fix them. 
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c|c|c|c| } 
+                \hline
+                \multirow{2}{*}{Maintenance Type} &
+                \multicolumn{4}{|c|}{Staff Type}\\
+                \cline{2-5}
+                & electric & mechanic & storage & software \\ 
+                \hline
+                blades    & 0 & 3 & 4 & 0 \\ 
+                gearbox   & 3 & 4 & 0 & 1 \\ 
+                generator & 4 & 3 & 0 & 1 \\ 
+                sensors   & 5 & 3 & 1 & 3 \\ 
+                wiring    & 3 & 0 & 3 & 2 \\ 
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{main\_req\_st} % displayed in doc
+        \label{param_main_req_st} % for reference
+        \end{table}
+
+        \subsubsection{Parameter main\_burnout and burnout\_coef}
+        The parameter tells how exhausting the task is for the staff based on severity. The higher 
+        the value, the more the task weighs when calculating the number of tasks per staff member.
+        The latter is represented by the parameter \textit{burnout\_coef} and is set to \textbf{15} 
+        meaning that no more than 15 tasks can be assigned to 1 staff member.
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c| } 
+                \hline
+                Maintenance Severity & Value \\
+                \hline
+                normal   & .75 \\ 
+                severe   & 1.3 \\ 
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{main\_burnout} % displayed in doc
+        \label{param_main_burnout} % for reference
+        \end{table}
+
+        \subsubsection{Parameter main\_material\_cost}
+        The parameter contains the cost of material associated with the maintenance tasks.
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c| } 
+                \hline
+                Maintenance Type & Material Cost \\ 
+                \hline
+                blades    & 100 \\ 
+                gearbox   & 150 \\ 
+                generator & 120 \\ 
+                sensors   & 50  \\ 
+                wiring    & 70  \\ 
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{main\_material\_cost} % displayed in doc
+        \label{param_main_material_cost} % for reference
+        \end{table}
+
+        \subsubsection{Parameter staff\_level\_xp}
+        The parameter contains the experience points associated to level of the staff. The higher the 
+        level, the more experience point the person has (and also more expensive).
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c| } 
+                \hline
+                Staff Level & XP \\
+                \hline
+                junior   & 2  \\ 
+                middle   & 15 \\ 
+                senior   & 40 \\
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{staff\_level\_xp} % displayed in doc
+        \label{param_staff_level_xp} % for reference
+        \end{table}
+
+        \subsubsection{Parameter staff\_cost}
+        The parameter holds the cost of hiring staff of given type and experience level.
+        \begin{table}[H]
+            \begin{center}
+                %\begin{tabular}{ | p{10em} | p{1.5cm} | p{1.5cm} | }
+                \begin{tabular}{ |c|c|c|c| } 
+                \hline
+                \multirow{2}{*}{Staff Type} &
+                \multicolumn{3}{|c|}{Staff Level}\\
+                \cline{2-4}
+                & junior & middle & senior \\ 
+                \hline
+                electric   & 10 & 15 & 40 \\ 
+                mechanic   & 8  & 18 & 30 \\ 
+                storage    & 12 & 15 & 20 \\ 
+                software   & 10 & 40 & 50 \\
+                \hline
+                \end{tabular}
+            \end{center}
+        \caption{staff\_cost} % displayed in doc
+        \label{param_staff_cost} % for reference
+        \end{table}
+
+        \subsubsection{Generated output}
+        The section shows the generated output based on the above input and model setup. The output 
+        can be found in the \textbf{output.txt} and also in the \textbf{report.txt} files. The latter
+        is scripted in the \textit{windfarm.mod} and provides a more readable format of the output.
 
     \subsection{Effect of parameters}
