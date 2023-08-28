@@ -15,8 +15,6 @@
 \usepackage{float}
 \usepackage{nameref}
 \usepackage{listings}
-\usepackage{minted}
-\usemintedstyle{friendly} % run on terminal for available styles $ pygmentize -L styles
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -25,6 +23,26 @@
     linkcolor=black,
     urlcolor=black
 }
+% code blocks
+\usepackage{minted}
+\usepackage[dvipsnames]{xcolor}
+\usemintedstyle[bash]{fruity} % run on terminal for available styles $ pygmentize -L styles
+\definecolor{codebackground}{RGB}{240, 240, 235}
+\newsavebox{\mintedbox}
+\newenvironment{boxminted}
+ {
+  \VerbatimEnvironment
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{lrbox}{\mintedbox}
+  \begin{minted}
+ }
+ {
+  \end{minted}
+  \end{lrbox}
+  \noindent\colorbox{codebackground}{\usebox{\mintedbox}}
+  \newline
+ }
+
 
 \title{ {Windfarm maintenance}\\
   %\vspace{5cm}

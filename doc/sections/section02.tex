@@ -88,7 +88,7 @@
 
         \text{Finally, the required condition is}
         %total_staff_xp_task[mt] >= total_main_req_xp[mt];
-        \begin{equation}
+        \begin{equation} \label{xpeq}
             \underset{mt\times 1}{\text{total\_staff\_xp\_task}} >=  
                 \underset{mt\times 1}{\text{total\_main\_req\_xp}}
         \end{equation}
@@ -103,15 +103,16 @@
 
         \text{The staff condition is}
         %total_staff[st] >= main_req_st[mt, st];
-        \begin{equation}
+        \begin{equation}\label{staffeq}
             \underset{st\times 1}{\text{total\_staff}} >= 
-                \sum_{mt}\underset{mt\times st}{\text{main\_req\_st}^T\text{[mt,st]}}
+                %\sum_{mt}
+                \underset{mt\times st}{\text{main\_req\_st}^T\text{[mt,st]}}
         \end{equation}
 
         \subparagraph{Minimum maintenance} \label{minimum maintenance} \text{} \newline
         \hspace*{.5cm}No redundant variables this time:
         %quantity[mt] >= sum{ms in MaintenanceSeverity} main_req[mt,ms];
-        \begin{equation}
+        \begin{equation}\label{maineq}
             \underset{mt\times 1}{\text{quantity}} >= 
                 \sum_{ms}\underset{mt\times ms}{\text{main\_req[mt,ms]}}
         \end{equation}
@@ -119,7 +120,7 @@
         \subparagraph{Burnout condition} \label{burnout condition} \text{} \newline
         \hspace*{.5cm}Redundant variables:
         %weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
-        \begin{equation}
+        \begin{equation}\label{burnouteq}
             %\hfilneg
             \underset{mt\times 1}{\text{weighted\_maintenance\_tasks}} =  
                 \underset{mt\times ms}{\text{main\_req[mt,ms]}}\times \underset{ms\times 1}{\text{main\_burnout[ms]}}
@@ -342,17 +343,54 @@
         The section shows the generated output based on the above input and model setup. The output 
         can be found in the \textbf{output.txt} and also in the \textbf{report.txt} files. The latter
         is scripted in the \textit{windfarm.mod} and provides a more readable format of the output.
+        The first printed section in the \textit{report.txt} file is the \textit{total\_main\_req\_xp}
+        which is just the required experience points per maintenance tasks depending on whether only
+        normal or also severe occurences of the given tasks are expected in the problem setting (more
+        precisely in the \textit{main\_req} parameter). \bigskip
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            total_main_req_xp
+            blades 125
+            gearbox 150
+            generator 230
+            sensors 150
+            wiring 30
+        \end{boxminted}
+        \newline
+        %\hfill\break\bigskip
+        Secondly, the experience points of the staff per maintenance tasks are printed. 
+        The previous vector and the one below are to be compared in 
+        \eqref{xpeq} so that \textit{total\_staff\_xp\_task} is expected to be greater or equal 
+        than \textit{total\_main\_req\_xp} for all maintenance types. \bigskip
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            total_staff_xp_task
+            blades 125
+            gearbox 238
+            generator 238
+            sensors 263
+            wiring 163
+        \end{boxminted}
+        \newline
+        Next, take a look at \textit{total\_staff} to make sure we have greater or equal number of 
+        staff per staff types as required in the \textit{main\_req\_st} parameter \eqref{staffeq}.
+        \bigskip
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            total_staff
+            electric 12
+            mechanic 12
+            storage 6
+            software 5
+        \end{boxminted}
+        \newline
 
-        \begin{listing}[htbp]
-            \begin{minted}[]{bash}
-                ------------------------------------------
-                total_main_req_xp
-                blades 125
-                gearbox 150
-                generator 230
-                sensors 150
-                wiring 30
-            \end{minted}
-        \end{listing}
+
 
     \subsection{Effect of parameters}
