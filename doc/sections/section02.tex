@@ -377,7 +377,7 @@
         \end{boxminted}
         \newline
         Next, take a look at \textit{total\_staff} to make sure we have greater or equal number of 
-        staff per staff types as required in the \textit{main\_req\_st} parameter \eqref{staffeq}.
+        staff per staff types than as required in parameter \textit{main\_req\_st} \eqref{staffeq}.
         \bigskip
         \newline
         \vspace{2pt}
@@ -390,7 +390,71 @@
             software 5
         \end{boxminted}
         \newline
+        Next up is the burnout constraint \eqref{burnouteq} ensuring that the severity weighted count of maintenance jobs
+        per employee does not exceed the parameter \textit{burnout\_coef} = 15 on staff type level.
+        \bigskip
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            total_req_wgt_staff over total_staff
+            electric 13.975000
+            mechanic 14.625000
+            storage  14.925000
+            software 13.310000
+        \end{boxminted}
+        \newline
+        Finally, we would like to see how many employees we need to hire with what level of experience
+        and of course what cost impact it generates. To obtain this, the variable 
+        \textit{staff\_to\_hire} and the product of this with parameter \textit{staff\_cost} are 
+        printed.
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            staff_to_hire and staff cost ===== 425
+            electric   =========== 160
+            junior     4.......... 40
+            middle     8.......... 120
+            senior     0.......... 0
 
+            mechanic   =========== 140
+            junior     10.......... 80
+            middle     0.......... 0
+            senior     2.......... 60
 
+            storage   =========== 75
+            junior     5.......... 60
+            middle     1.......... 15
+            senior     0.......... 0
+
+            software   =========== 50
+            junior     5.......... 50
+            middle     0.......... 0
+            senior     0.......... 0
+        \end{boxminted}
+        \newline
+        Read the above table as follows: e.g. staff type electric requires 4 juniors and 8 middle
+        level employees, no senior level staff is required. The cost of hiring 4 juniors is 
+        40 whereas the mid-level colleagues cost 120, totalling 160. Summing all the categories
+        we obtain total staff cost of 425.
+        \bigskip
+        \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            main_material_cost ===== 7163
+            blades......1700
+            gearbox......2400
+            generator......1920
+            sensors......450
+            wiring......693
+            ------------------------------------------
+            total costs = SUM(material costs) + SUM(staff costs) 
+            7588 = 7163 + 425
+        \end{boxminted}
+        \newline
+        Lastly, material costs are also displayed and the sum of material and staff cost to obtain
+        the total costs on firm level.
 
     \subsection{Effect of parameters}

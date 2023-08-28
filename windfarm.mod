@@ -130,6 +130,16 @@ printf "\n";
 
 printf "-----------------------------------------------------------------------\n";
 
+printf "total_req_wgt_staff over total_staff\n";
+for{st in StaffTypes}{
+	    printf "%s\t",st;
+	    printf "%f",total_req_wgt_staff[st]/total_staff[st];
+	printf "\n";
+}
+printf "\n";
+
+printf "-----------------------------------------------------------------------\n";
+
 printf "staff_to_hire and staff cost ===== %d\n", sum{st in StaffTypes,sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl];
 for{st in StaffTypes}{
 	printf "%s",st;
