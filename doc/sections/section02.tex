@@ -468,10 +468,16 @@
     The model might be further enhanced with additional constraints giving more importance 
     to the \textit{quantity[mt]} variable.
 
-    \paragraph{} By observing the \nameref{conditions} section, it can be noticed that first element
-    having an effect on variable \textit{staff\_to\_hire} is the parameter \textit{staff\_level\_xp}
-    defining the experience points associated to different levels of the employee. According to the 
-    conditions, the staff to be hired has to have enough experience points to be able to do all 
-    maintenance jobs. The required experience points for a maintenance job type is determined by
-    \textit{main\_req\_xp} (number of XPs per job types based on severity) and parameter 
-    \textit{main\_req} that tells a job type with "severe" category is expected or not.
+    \paragraph{} By observing the \nameref{xp condition} section, it can be noticed that the first 
+    element having an effect on variable \textit{staff\_to\_hire} is the parameter 
+    \textit{staff\_level\_xp} defining the experience points associated to different levels of the 
+    employee. According to the conditions, the staff to be hired has to have enough experience points 
+    to be able to do all maintenance jobs. The required experience points for a maintenance job type 
+    is determined by \textit{main\_req\_xp} (number of XPs per job types based on severity) and 
+    parameter \textit{main\_req} that tells if a job type with "severe" category is expected or not.
+    
+    \paragraph{} Following the XPs, the \nameref{staff condition} section hints that 
+    \textit{main\_req\_st} also affects the results, in other words, we need different staff 
+    composition if the maintenance jobs require different number of personnel from different job
+    types. E.g. if job type "blades" would require electricians as well, or different number of 
+    mechanics, we would end up with different outcome.
