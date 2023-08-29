@@ -225,7 +225,7 @@
                 \end{tabular}
             \end{center}
         \caption{main\_req\_xp} % displayed in doc
-        \label{param_main_req} % for reference
+        \label{param_main_req_xp} % for reference
         \end{table}
 
         \subsubsection{Parameter main\_req\_st}
@@ -501,13 +501,144 @@
     \end{itemize}
 
     \subsubsection{$\Delta$ main\_req\_st}
-    ...
+    Table \ref{param_main_req_st} shows the required personnel to carry out the different type of 
+    tasks. Let's suppose, we start to install a new type of gearbox that requires only 1 electrician
+    and 2 mechanics (instead of 3 and 4 respectively). \bigskip
+    \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            staff_to_hire and staff cost ===== 392
+            electric   =========== 140
+            junior     2.......... 20
+            middle     8.......... 120
+            senior     0.......... 0
+            
+            mechanic   =========== 124
+            junior     8.......... 64
+            middle     0.......... 0
+            senior     2.......... 60
+            
+            storage   =========== 78
+            junior     4.......... 48
+            middle     2.......... 30
+            senior     0.......... 0
+            
+            software   =========== 50
+            junior     5.......... 50
+            middle     0.......... 0
+            senior     0.......... 0            
+        \end{boxminted}
+    \newline
+    As expected, the staff cost is down from 425 to 392, and ceteris paribus we need only 
+    2 junior electricians and 8 junior mechanics.
 
     \subsubsection{$\Delta$ main\_req\_xp}
-    ...
+    Table \ref{param_main_req_xp} shows the required experience points per maintenance jobs in job
+    severity breakdown. Assume now, that a severe "blades" job requires only 75 experience points
+    instead of 125 and a normal "wiring" requires 50 (instead of 30) just like the severe version.
+    \bigskip
+    \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            staff_to_hire and staff cost ===== 418
+            electric   =========== 175
+            junior     1.......... 10
+            middle     11.......... 165
+            senior     0.......... 0
+
+            mechanic   =========== 118
+            junior     11.......... 88
+            middle     0.......... 0
+            senior     1.......... 30
+
+            storage   =========== 75
+            junior     5.......... 60
+            middle     1.......... 15
+            senior     0.......... 0
+
+            software   =========== 50
+            junior     5.......... 50
+            middle     0.......... 0
+            senior     0.......... 0
+        \end{boxminted}
+    \newline
+    Due to the aforementioned changes - ceteris paribus - number of junior electricians are down to 1
+    and middle level electricians increases to 11 (4 and 8 original values), electrician subgroup 
+    in staff cost is up to 175 (from 160). Additionally, 11 junior mechanics are required and only 1
+    senior (instead of 10 and 2), driving the staff cost on mechanics from 140 down to 118. The total
+    staff cost change is therefore -7 (from 425 to 418).  
 
     \subsubsection{$\Delta$ staff\_level\_xp}
-    ...
+    Consider this time table \ref{param_staff_level_xp} with the experience points associated with
+    staff levels. Assume an increase of experience points in of middle level employees from 15 to 30.
+    \bigskip
+    \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            staff_to_hire and staff cost ===== 385
+            electric   =========== 155
+            junior     5.......... 50
+            middle     7.......... 105
+            senior     0.......... 0
+            
+            mechanic   =========== 96
+            junior     12.......... 96
+            middle     0.......... 0
+            senior     0.......... 0
+            
+            storage   =========== 84
+            junior     2.......... 24
+            middle     4.......... 60
+            senior     0.......... 0
+            
+            software   =========== 50
+            junior     5.......... 50
+            middle     0.......... 0
+            senior     0.......... 0            
+        \end{boxminted}
+    \newline
+    The ceteris paribus increase of XPs of the middle level staff causes that no senior employees are
+    needed to fulfill the jobs and also pushes the staff cost down to 385 from 425. However, this is
+    not the most realistic scenario as the higher XPs of middle level staff would also increase 
+    their (expected) salaries which eventually could balance out their advantage.
 
     \subsubsection{$\Delta$ staff\_cost}
-    ...
+    Finally, we managed to hire some senior electricians for much lower salary, the corresponding 
+    value in table \ref{param_staff_cost} is down from 40 to 20.
+    \bigskip
+    \newline
+        \vspace{2pt}
+        \begin{boxminted}{bash}
+            ------------------------------------------
+            staff_to_hire and staff cost ===== 407
+            electric   =========== 170
+            junior     6.......... 60
+            middle     2.......... 30
+            senior     4.......... 80
+            
+            mechanic   =========== 96
+            junior     12.......... 96
+            middle     0.......... 0
+            senior     0.......... 0
+            
+            storage   =========== 91
+            junior     3.......... 36
+            middle     1.......... 15
+            senior     2.......... 40
+            
+            software   =========== 50
+            junior     5.......... 50
+            middle     0.......... 0
+            senior     0.......... 0                      
+        \end{boxminted}
+    \newline
+    This single parameter causes changes in almost all staff types except for the software engineers.
+    When senior electricians earn 20 instead of 40, this makes the company to hire 4 senior 
+    electricians, 2 middle level and 6 juniors instead of 0, 8, 4 respectively in the baseline
+    scenario. Also, the senior electricians' salary correlates with the mechanics where the company
+    no longer looks for hiring 2 seniors, instead would replace them with 2 juniors. In the warehouse
+    however, 2 juniors are let go and 2 senors are welcome. The total staff cost is down to 407 from
+    425.
