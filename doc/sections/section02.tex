@@ -46,7 +46,7 @@
 
     \subsection{Model setup}
 
-        \subsubsection{Conditions and variables}
+        \subsubsection{Conditions and variables} \label{conditions}
         The condition section of the modelling file is broken down to 4 main sections, XP conditions,
         Staff conditions, Minimum maintenance and Burnout indicators respectively. The XP condition 
         takes care of that the hired staff have at least as much XP points that is necessary to be able
@@ -468,4 +468,10 @@
     The model might be further enhanced with additional constraints giving more importance 
     to the \textit{quantity[mt]} variable.
 
-    \paragraph{} 
+    \paragraph{} By observing the \nameref{conditions} section, it can be noticed that first element
+    having an effect on variable \textit{staff\_to\_hire} is the parameter \textit{staff\_level\_xp}
+    defining the experience points associated to different levels of the employee. According to the 
+    conditions, the staff to be hired has to have enough experience points to be able to do all 
+    maintenance jobs. The required experience points for a maintenance job type is determined by
+    \textit{main\_req\_xp} (number of XPs per job types based on severity) and parameter 
+    \textit{main\_req} that tells a job type with "severe" category is expected or not.
