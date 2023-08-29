@@ -477,7 +477,37 @@
     parameter \textit{main\_req} that tells if a job type with "severe" category is expected or not.
     
     \paragraph{} Following the XPs, the \nameref{staff condition} section hints that 
-    \textit{main\_req\_st} also affects the results, in other words, we need different staff 
-    composition if the maintenance jobs require different number of personnel from different job
-    types. E.g. if job type "blades" would require electricians as well, or different number of 
-    mechanics, we would end up with different outcome.
+    \textit{main\_req\_st} also affects the hiring aspect of the results, in other words, we need 
+    different staff composition if the maintenance jobs require different number of personnel from 
+    different job types. E.g. if job type "blades" would require electricians as well, or different 
+    number of mechanics, we would end up with different outcome.
+
+    \paragraph{} Finally, the burnout effect (through the related \textit{burnout\_coef} and 
+    \textit{main\_burnout}) is also taking impact. It is relatively easy to see that in case 
+    of the coefficient, a higher value relaxes the condition (1 employee can take on more tasks
+    without burning out) whereas changing the weights has opposite effect (higher values increases
+    the required number of employees). As the burnout effect is the most straightforward - as it 
+    affects all job and staff types the same way - the analysis section is reduced to the effects 
+    of parameters setting the XPs and staff costs. In this aspect, it is decisive how much more a 
+    senior is paid compared to a junior or middle level staff and also how many employees are 
+    required from the different staff types to complete each maintenance jobs.
+
+    \paragraph{} Based on the above overview, the following parameters will be changed and analysed:
+    \begin{itemize}
+        \item main\_req\_st
+        \item main\_req\_xp
+        \item staff\_level\_xp
+        \item staff\_cost
+    \end{itemize}
+
+    \subsubsection{$\Delta$ main\_req\_st}
+    ...
+
+    \subsubsection{$\Delta$ main\_req\_xp}
+    ...
+
+    \subsubsection{$\Delta$ staff\_level\_xp}
+    ...
+
+    \subsubsection{$\Delta$ staff\_cost}
+    ...
