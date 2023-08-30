@@ -7,8 +7,9 @@ GLPK-utils installed on machine. E.g on Ubuntu run `sudo apt install glpk-utils`
 The below code calls the model file `windfarm.mod` with data files `wfmaintenance.dat` and `wfstaff.dat` and writes `output.txt`.
 
 `glpsol -m windfarm.mod -d wfmaintenance.dat -d wfstaff.dat -o output.txt`  
-and the documentation can be generated from `doc` folder by
-`pdflatex -shell-escape windfarm.tex`
+and the documentation can be generated from `doc` folder by  
+`pdflatex -shell-escape windfarm.tex`  
+using TeX Live
 
 # Windfarm problem setting
 Several maintenance jobs specific to windfarm are to be carried out while minimizing costs. Costs are broken down to material and staff related components. Each maintenance job requires staff with different expertise and each job can be normal or severe maintenance that requires deeper knowledge from the staff to resolve. The staff also has an attribute called experience points or job expertise that can be junior/middle/senior the higher the level of experience the more XP is related but also higher staff costs are associated.  
