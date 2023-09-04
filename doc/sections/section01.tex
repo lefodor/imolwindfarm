@@ -80,13 +80,13 @@
       \begin{itemize}
         \item \textit{XP condition:} sufficient XP points to carry out upcoming maintenance tasks based on severity. 
         It is only required to have enough XPs to carry out at least one of all types of maintenance task 
-        (based on severity), e.g. maintenance task "blades" normally requires 10 XPs whereas severe 
-        requires 80 XPs but when no severe maintenance task is scheduled for "blades" (main\_req parameter 
-        is set to 0) then the condition prescribes 10 XPs for this maintenance task (normal severity level).
+        (based on severity), e.g. maintenance task "blades" normally requires 50 XPs whereas severe 
+        requires 125 XPs but when no severe maintenance task is scheduled for "blades" (main\_req parameter 
+        is set to 0) then the condition prescribes 50 XPs for this maintenance task (normal severity level).
         It does not matter how many maintenance jobs are expected, the hired staff has to have 
         enough XPs to do all types of jobs. E.g. if normal maintenance task "blades" is expected 
         12 times and no severe "blades" task required, then XPs of hired personnel has to have at least 
-        10 XPs (normal "blade" maintenance XP) and not 12 times 10 XPs. It will just take them more time 
+        50 XPs (normal "blade" maintenance XP) and not 12 times 50 XPs. It will just take them more time 
         to do all 12 normal "blades" job.
         \item \textit{Staff condition:} number of staff for a given type (no matter if junior/middle/senior) 
         covers the required number of staff for each maintenance task. E.g. in order to be able carry 
@@ -94,7 +94,7 @@
         and 4 storage personnel so at least 3 mechanics and 4 storage workers have to be hired.
         \item \textit{Minimum maintenance:} maintenance jobs defined in main\_req are carried out.
         \item \textit{Burnout indicator:} staff is not overloaded meaning that the severity weighted number 
-        of maintenance tasks per staff member has to be lower than the parameter burnout\_coef.
+        of maintenance tasks per staff member has to be lower than the parameter \textit{burnout\_coef}.
       \end{itemize}
 
     \subsection{Objectives}

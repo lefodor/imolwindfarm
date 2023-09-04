@@ -80,7 +80,7 @@
             %\hfill
             \underset{mt\times 1}{\text{total\_staff\_xp\_task}} =
             \begin{cases}
-                \underset{st\times 1}{\text{total\_staff\_xp[st]}}, \underset{mt\times st}{\text{ if } \text{main\_req\_st[mt,st]}} > 0\\[3ex]
+                \sum_{st}{\underset{st\times 1}{\text{total\_staff\_xp[st]}}}, \underset{mt\times st}{\text{ if } \text{main\_req\_st[mt,st]}} > 0\\[3ex]
                 0, \text{ otherwise}
             \end{cases}
             %\hspace{10000pt minus 1fil}
@@ -484,7 +484,7 @@
 
     \paragraph{} Finally, the burnout effect (through the related \textit{burnout\_coef} and 
     \textit{main\_burnout}) is also taking impact. It is relatively easy to see that in case 
-    of the coefficient, a higher value relaxes the condition (1 employee can take on more tasks
+    of the coefficient a higher value relaxes the condition (1 employee can take on more tasks
     without burning out) whereas changing the weights has opposite effect (higher values increases
     the required number of employees). As the burnout effect is the most straightforward - as it 
     affects all job and staff types the same way - the analysis section is reduced to the effects 
@@ -640,5 +640,5 @@
     electricians, 2 middle level and 6 juniors instead of 0, 8, 4 respectively in the baseline
     scenario. Also, the senior electricians' salary correlates with the mechanics where the company
     no longer looks for hiring 2 seniors, instead would replace them with 2 juniors. In the warehouse
-    however, 2 juniors are let go and 2 senors are welcome. The total staff cost is down to 407 from
+    however, 2 juniors are let go and 2 seniors are welcome. The total staff cost is down to 407 from
     425.
