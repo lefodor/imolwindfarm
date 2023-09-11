@@ -55,7 +55,8 @@ s.t. StaffNoBurnout{mt in MaintenanceTypes}:
     weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
 
 s.t. TotalReqWgtStaff{st in StaffTypes}:
-    total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
+    #total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
+	total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * (if main_req_st[mt,st] == 0 then 0 else 1);
 
 # burnout
 s.t. BurnOutNotAllowed{st in StaffTypes}:
@@ -168,5 +169,17 @@ sum{st in StaffTypes,sl in StaffLevels} staff_to_hire[st,sl] * staff_cost[st,sl]
 
 printf "-----------------------------------------------------------------------\n";
 
-
+printf "\n";
+for{st in StaffTypes}{
+	printf "\t%s",st;
+}
+printf "\n";
+for{mt in MaintenanceTypes}{
+	printf "%s\t",mt;
+	for{st in StaffTypes}{
+		printf "" & (if main_req_st[mt,st] == 0 then 0 else 1) & "\t";
+	}
+	printf "\n";
+}
+printf "-----------------------------------------------------------------------\n";
 end;
