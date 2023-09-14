@@ -1,0 +1,260 @@
+\section{Output}
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        Problem:    windfarm
+        Rows:       62
+        Columns:    44 (12 integer, 0 binary)
+        Non-zeros:  141
+        Status:     INTEGER OPTIMAL
+        Objective:  TotalCosts = 7588 (MINimum)
+        
+           No.   Row name        Activity     Lower bound   Upper bound
+        ------ ------------    ------------- ------------- -------------
+             1 RequiredXP[blades]
+                                         125           125             = 
+             2 RequiredXP[gearbox]
+                                         150           150             = 
+             3 RequiredXP[generator]
+                                         230           230             = 
+             4 RequiredXP[sensors]
+                                         150           150             = 
+             5 RequiredXP[wiring]
+                                          30            30             = 
+             6 AvailableXP[electric]
+                                           0            -0             = 
+             7 AvailableXP[mechanic]
+                                           0            -0             = 
+             8 AvailableXP[storage]
+                                           0            -0             = 
+             9 AvailableXP[software]
+                                           0            -0             = 
+            10 AvailableXP_task[blades]
+                                           0            -0             = 
+            11 AvailableXP_task[gearbox]
+                                           0            -0             = 
+            12 AvailableXP_task[generator]
+                                           0            -0             = 
+            13 AvailableXP_task[sensors]
+                                           0            -0             = 
+            14 AvailableXP_task[wiring]
+                                           0            -0             = 
+            15 AvailableXP_ge_RequiredXP[blades]
+                                           0            -0               
+            16 AvailableXP_ge_RequiredXP[gearbox]
+                                          88            -0               
+            17 AvailableXP_ge_RequiredXP[generator]
+                                           8            -0               
+            18 AvailableXP_ge_RequiredXP[sensors]
+                                         113            -0               
+            19 AvailableXP_ge_RequiredXP[wiring]
+                                         133            -0               
+    \end{boxminted}
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        20 AvailableStaff[electric]
+        0            -0             = 
+        21 AvailableStaff[mechanic]
+                0            -0             = 
+        22 AvailableStaff[storage]
+                0            -0             = 
+        23 AvailableStaff[software]
+                0            -0             = 
+        24 AvailableStaff_ge_RequiredStaff[blades,electric]
+            12            -0               
+        25 AvailableStaff_ge_RequiredStaff[blades,mechanic]
+            12             3               
+        26 AvailableStaff_ge_RequiredStaff[blades,storage]
+                6             4               
+        27 AvailableStaff_ge_RequiredStaff[blades,software]
+                5            -0               
+        28 AvailableStaff_ge_RequiredStaff[gearbox,electric]
+            12             3               
+        29 AvailableStaff_ge_RequiredStaff[gearbox,mechanic]
+            12             4               
+        30 AvailableStaff_ge_RequiredStaff[gearbox,storage]
+                6            -0               
+        31 AvailableStaff_ge_RequiredStaff[gearbox,software]
+                5             1               
+        32 AvailableStaff_ge_RequiredStaff[generator,electric]
+            12             4               
+        33 AvailableStaff_ge_RequiredStaff[generator,mechanic]
+            12             3               
+        34 AvailableStaff_ge_RequiredStaff[generator,storage]
+                6            -0               
+        35 AvailableStaff_ge_RequiredStaff[generator,software]
+                5             1               
+        36 AvailableStaff_ge_RequiredStaff[sensors,electric]
+            12             5               
+        37 AvailableStaff_ge_RequiredStaff[sensors,mechanic]
+            12             3               
+        38 AvailableStaff_ge_RequiredStaff[sensors,storage]
+                6             1               
+        39 AvailableStaff_ge_RequiredStaff[sensors,software]
+                5             3               
+    \end{boxminted}
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        40 AvailableStaff_ge_RequiredStaff[wiring,electric]
+        12             3               
+        41 AvailableStaff_ge_RequiredStaff[wiring,mechanic]
+                12            -0               
+        42 AvailableStaff_ge_RequiredStaff[wiring,storage]
+                6             3               
+        43 AvailableStaff_ge_RequiredStaff[wiring,software]
+                5             2               
+        44 RequiredMaintenanceDone[blades]
+                17            17               
+        45 RequiredMaintenanceDone[gearbox]
+                16            16               
+        46 RequiredMaintenanceDone[generator]
+                16            16               
+        47 RequiredMaintenanceDone[sensors]
+                9             9               
+        48 RequiredMaintenanceDone[wiring]
+                9             9               
+        49 StaffNoBurnout[blades]
+            15.5          15.5             = 
+        50 StaffNoBurnout[gearbox]
+            13.65         13.65             = 
+        51 StaffNoBurnout[generator]
+            17.5          17.5             = 
+        52 StaffNoBurnout[sensors]
+            7.3           7.3             = 
+        53 StaffNoBurnout[wiring]
+            6.75          6.75             = 
+        54 TotalReqWgtStaff[electric]
+                0            -0             = 
+        55 TotalReqWgtStaff[mechanic]
+                0            -0             = 
+        56 TotalReqWgtStaff[storage]
+                0            -0             = 
+        57 TotalReqWgtStaff[software]
+                0            -0             = 
+        58 BurnOutNotAllowed[electric]
+            -12.3                          -0 
+        59 BurnOutNotAllowed[mechanic]
+            -4.5                          -0 
+
+    \end{boxminted}
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        60 BurnOutNotAllowed[storage]
+        -0.45                          -0 
+        61 BurnOutNotAllowed[software]
+                -8.45                          -0 
+        62 TotalCosts               7588                             
+
+        No. Column name       Activity     Lower bound   Upper bound
+        ------ ------------    ------------- ------------- -------------
+        1 total_main_req_xp[blades]
+                125                             
+        2 total_main_req_xp[gearbox]
+                150                             
+        3 total_main_req_xp[generator]
+                230                             
+        4 total_main_req_xp[sensors]
+                150                             
+        5 total_main_req_xp[wiring]
+                30                             
+        6 total_staff_xp[electric]
+                128                             
+        7 total_staff_xp[mechanic]
+                100                             
+        8 total_staff_xp[storage]
+                25                             
+        9 total_staff_xp[software]
+                10                             
+        10 total_staff[electric]
+                12                             
+        11 total_staff[mechanic]
+                12                             
+        12 total_staff[storage]
+                    6                             
+        13 total_staff[software]
+                    5                             
+        14 total_staff_xp_task[blades]
+                125                             
+        15 total_staff_xp_task[gearbox]
+                238                             
+        16 total_staff_xp_task[generator]
+                238                             
+        17 total_staff_xp_task[sensors]
+                263                             
+        18 total_staff_xp_task[wiring]
+                163                             
+        19 weighted_maintenance_tasks[blades]
+                15.5                             
+        20 weighted_maintenance_tasks[gearbox]
+                13.65                             
+    \end{boxminted}
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        21 weighted_maintenance_tasks[generator]
+        17.5                             
+        22 weighted_maintenance_tasks[sensors]
+                7.3                             
+        23 weighted_maintenance_tasks[wiring]
+                6.75                             
+        24 total_req_wgt_staff[electric]
+            167.7                             
+        25 total_req_wgt_staff[mechanic]
+            175.5                             
+        26 total_req_wgt_staff[storage]
+            89.55                             
+        27 total_req_wgt_staff[software]
+            66.55                             
+        28 staff_to_hire[electric,junior]
+        *              4             0               
+        29 staff_to_hire[electric,middle]
+        *              8             0               
+        30 staff_to_hire[electric,senior]
+        *              0             0               
+        31 staff_to_hire[mechanic,junior]
+        *             10             0               
+        32 staff_to_hire[mechanic,middle]
+        *              0             0               
+        33 staff_to_hire[mechanic,senior]
+        *              2             0               
+        34 staff_to_hire[storage,junior]
+        *              5             0               
+        35 staff_to_hire[storage,middle]
+        *              1             0               
+        36 staff_to_hire[storage,senior]
+        *              0             0               
+        37 staff_to_hire[software,junior]
+        *              5             0               
+        38 staff_to_hire[software,middle]
+        *              0             0               
+        39 staff_to_hire[software,senior]
+        *              0             0               
+        40 quantity[blades]
+                17             0               
+    \end{boxminted}
+    \newpage
+    \vspace{2pt}
+    \begin{boxminted}{bash}
+        41 quantity[gearbox]
+        16             0               
+        42 quantity[generator]
+                16             0               
+        43 quantity[sensors]
+                9             0               
+        44 quantity[wiring]
+                9             0               
+
+        Integer feasibility conditions:
+
+        KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+        KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+        End of output
+    \end{boxminted}

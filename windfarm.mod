@@ -55,8 +55,8 @@ s.t. StaffNoBurnout{mt in MaintenanceTypes}:
     weighted_maintenance_tasks[mt] = sum{ms in MaintenanceSeverity} main_req[mt,ms] * main_burnout[ms];
 
 s.t. TotalReqWgtStaff{st in StaffTypes}:
-    #total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
-	total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * (if main_req_st[mt,st] == 0 then 0 else 1);
+    total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * main_req_st[mt,st];
+	#total_req_wgt_staff[st] = sum{mt in MaintenanceTypes} weighted_maintenance_tasks[mt] * (if main_req_st[mt,st] == 0 then 0 else 1);
 
 # burnout
 s.t. BurnOutNotAllowed{st in StaffTypes}:
