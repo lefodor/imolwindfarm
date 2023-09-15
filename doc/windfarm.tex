@@ -2,6 +2,16 @@
 %\documentclass[12p,a4paper]{article}
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
+%\usepackage{biblatex} %Imports biblatex package
+
+\usepackage[
+backend=bibtex,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\addbibresource{windfarm.bib} %Import the bibliography file
+
+\usepackage[nottoc,numbib]{tocbibind}
 
 \usepackage{appendix}
 \usepackage{amsmath}
@@ -82,5 +92,7 @@
   \input{appendix/sourcecode}
   \input{appendix/codeoutput}
 
+  %bibliography
+  \printbibliography[heading=bibintoc,title={References}] %Prints bibliography
 
 \end{document}
